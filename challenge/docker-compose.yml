@@ -1,0 +1,23 @@
+version: '3.8'      #version of file format
+
+services:           #lists all parts of app (in this case web service, database service )
+  web:
+    #image: 462774209761.dkr.ecr.us-east-1.amazonaws.com/flask-mysql:latest      #uses docker compose to run a multi-container app using an image pulled from amazon ecr
+    build: .        #tells docker compose to build the web service from the docker file (locally)
+    ports:
+      - "5001:5001"
+    depends_on:
+      - redis       #ensures docker compose starts database service first before web service
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+
+  redis:        #needs to match the host in app.py
+    image: redis
+  # Making the storage persistent
+    volumes:
+    - redis-data:/data             #mounts redis-data volume defined below to '/data' in the Redis container
+
+volumes:
+  redis-data:                      #defining the volume as redis data 
+

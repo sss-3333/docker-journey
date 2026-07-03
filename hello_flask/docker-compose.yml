@@ -1,0 +1,17 @@
+version: '3.8'   #version of file format
+
+services:        #lists all parts of app (in this case web service, database service )
+  web:
+    image: 462774209761.dkr.ecr.us-east-1.amazonaws.com/flask-mysql:latest      #uses docker compose to run a multi-container app using an image pulled from amazon ecr
+    #build: .     #tells docker compose to build the web service from the docker file (locally)
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mydb       #ensures docker compose starts database service first before web service 
+
+  mydb:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: my-secret-pw
+
+## Now with just one command, both containers (flask application and web service) can be started together
