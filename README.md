@@ -53,6 +53,10 @@ Visit `http://localhost:5001` and `/count`
 
 ---
 
+## Project Visuals
+![Velvet Count Homepage](project-visuals/velvet-count-home.png)
+![Velvet Count Counter](project-visuals/velvet-count-counter.png)
+
 ## Image Registries
 
 Images were pushed to two registries:
